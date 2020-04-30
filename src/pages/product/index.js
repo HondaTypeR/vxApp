@@ -92,6 +92,11 @@ export default class Product extends Component {
     })
   }
 
+  handleReport= () => {
+    Taro.navigateTo({
+      url:`/pages/reportmission/index?matnr=${this.state.source.matnr}&operationcode=${this.state.source.operationcode}&ztmbh=${this.state.source.ztmbh}&orderno=${this.state.source.orderno}&producttext=${this.state.source.producttext}&id=${this.state.source.id}&position=${this.state.source.position}`
+    })
+  }
 
   render() {
     const {isOpen,source}=this.state
@@ -136,7 +141,7 @@ export default class Product extends Component {
            <AtTag className='message'>计划开工时间:{source.operationStartTime ? moment(source.operationStartTime).format('YYYY-MM-DD h:mm') : '暂无数据' }</AtTag>
            <AtTag className='message'>计划完工时间:{source.operationEndTime ? moment(source.operationEndTime).format('YYYY-MM-DD h:mm') : '暂无数据'}</AtTag>
           <View>
-          <AtTag className='bottonOne' circle>完工</AtTag>
+          <AtTag className='bottonOne' circle onClick={this.handleReport}>完工</AtTag>
           <AtTag className='bottonTwo' circle>去录入</AtTag>
           <AtTag className='bottonThird' circle>溯源</AtTag>
           </View>

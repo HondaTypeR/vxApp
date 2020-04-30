@@ -21,6 +21,7 @@ class App extends Component {
       'pages/message/index',
       'pages/user/index',
       'pages/product/index',
+      'pages/reportmission/index',
     ],
     window: {
       backgroundTextStyle: 'dark',
