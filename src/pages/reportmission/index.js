@@ -12,9 +12,8 @@ export default class Reportmission extends Component {
   constructor () {
     super(...arguments)
     this.state = {
-      value: '',
       data:{},
-      checkedList: [],
+      checkedList: [], // 报工人列表
     }
   }
 
@@ -38,12 +37,10 @@ export default class Reportmission extends Component {
   checkboxOption = (record) => {
     const arr = [];
     if(record.length>0){
-      record.map((item,index)=>{
+      record.map((item)=>{
         arr.push({
-          id:index,
-          value:item.id,
           label:item.username,
-          shift:item.shift
+          value:item.userEsbId+'/'+item.shiftId
         }) 
       })
       return arr
@@ -57,8 +54,24 @@ export default class Reportmission extends Component {
   }
 
   handleSubmit = () => {
-    console.log(this.$router.params.id)
-    console.log(this.state.checkedList)
+    const tempList = this.state.checkedList;
+    const params = []; // 报工人中间变量
+    const lastParams = [] // 最终传递报工人参数
+    const finalParams = []
+    tempList.map((item)=>{
+     params.push( item.split('/'))
+    })
+    params.map((item)=>{
+      lastParams.push({employeeId:item[0],shift:item[1]})
+    })
+    finalParams.push({
+      esbEmployeeList:lastParams,
+      id:this.$router.params.id,
+    })
+    this.props.dispatch({
+      type:'reportmission/doReport',
+      payload:finalParams,
+    })
   }
 
 

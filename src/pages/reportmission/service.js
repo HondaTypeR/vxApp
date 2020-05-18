@@ -6,3 +6,9 @@ export const getPeople = data => Request({
   method: 'GET',
   data,
 });
+
+export const doReport = data => Request({
+  url: 'http://saas.crrcdt.com:8015/api/rms-ts/v1/rms/rmsProductorder/save/',
+  method: 'POST',
+  data,
+});

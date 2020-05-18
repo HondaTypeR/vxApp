@@ -16,6 +16,10 @@ export default {
       return response
       
     },
+    *doReport({ payload }, { call }){
+      const response = yield call(reportMissionApi.doReport, payload);
+      return response
+    }
   },
 
   reducers: {
